@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة إيواءات دير البلح | الدعم الفني</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- QRCode.js Library CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        emeraldBrand: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                        },
+                        amberBrand: {
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 50%, #fef3c7 100%);
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+        .qr-frame {
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+        }
+        .pulse-badge {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .7; }
+        }
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; }
+            .glass-card { shadow: none !important; border: 1px solid #ccc !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 flex flex-col justify-between min-h-screen p-4 md:p-8">
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 transform -translate-y-20 opacity-0 transition-all duration-300 ease-in-out bg-slate-900 text-white px-6 py-3 rounded-xl shadow-2xl flex items-center space-x-3 space-x-reverse border border-slate-700 pointer-events-none">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-xl"></i>
+        <span id="toast-message" class="text-sm font-bold">تم نسخ الرابط بنجاح!</span>
+    </div>
+
+    <div class="max-w-5xl mx-auto w-full">
+        <!-- Header Banner -->
+        <header class="glass-card rounded-3xl p-6 md:p-8 shadow-xl mb-8 border-t-4 border-emerald-600 text-center relative overflow-hidden">
+            <div class="absolute -right-10 -top-10 w-40 h-40 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="absolute -left-10 -bottom-10 w-40 h-40 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+            <div class="inline-flex items-center gap-2 bg-emerald-100 text-emerald-800 px-4 py-1.5 rounded-full text-sm font-bold mb-4 shadow-sm">
+                <i class="fa-solid fa-tent text-emerald-600"></i>
+                <span>المكتب الرقمي الموحد</span>
+                <span class="w-2 h-2 rounded-full bg-emerald-500 pulse-badge"></span>
+            </div>
+
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight mb-2">
+                إدارة <span class="text-emerald-700">⛺ إيواءات دير البلح</span> | الدعم الفني
+            </h1>
+            <p class="text-slate-600 font-semibold text-base sm:text-lg max-w-2xl mx-auto">
+                🌍 جميع الروابط الرسمية المعتمدة لخدمات الإيواء والإغاثة الوطنية
+            </p>
+
+            <div class="mt-4 flex flex-wrap items-center justify-center gap-3 no-print">
+                <button onclick="window.print()" class="text-xs bg-slate-200 hover:bg-slate-300 text-slate-700 px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 font-bold">
+                    <i class="fa-solid fa-print"></i> طباعة الإنفوجرافيك
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Cards Grid -->
+        <main class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            
+            <!-- Card 1: منظومة الإيواءات -->
+            <div class="glass-card rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between border-t-4 border-blue-600 group relative">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center text-xl font-black shadow-inner">
+                            <i class="fa-solid fa-house-chimney-window"></i>
+                        </span>
+                        <span class="bg-blue-50 text-blue-700 text-xs font-extrabold px-3 py-1 rounded-full border border-blue-200">
+                            المنظومة الرئيسية
+                        </span>
+                    </div>
+
+                    <h2 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
+                        🌍 منظومة الإيواءات
+                    </h2>
+                    <p class="text-slate-500 text-xs font-semibold mb-5 leading-relaxed">
+                        البوابة الرسمية الخاصة بإدارة وتسجيل الأسر في مراكز ونقاط الإيواء.
+                    </p>
+
+                    <!-- QR Code Container -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col items-center justify-center mb-5 qr-frame relative">
+                        <div id="qrcode-1" class="p-2 bg-white rounded-lg shadow-sm border border-slate-100"></div>
+                        <span class="text-[11px] font-bold text-slate-400 mt-2 flex items-center gap-1">
+                            <i class="fa-solid fa-qrcode"></i> امسح الكود بالهاتف للدخول
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="space-y-2">
+                    <a href="https://displacedfamily.com/login" target="_blank" rel="noopener noreferrer" 
+                       class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-lg hover:shadow-blue-500/30 flex items-center justify-center gap-2 text-sm group">
+                        <span>دخول مباشر</span>
+                        <i class="fa-solid fa-arrow-left transition-transform group-hover:-translate-x-1"></i>
+                    </a>
+                    
+                    <button onclick="copyToClipboard('https://displacedfamily.com/login', 'منظومة الإيواءات')" 
+                            class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2 px-3 rounded-xl transition-all text-xs flex items-center justify-center gap-2 border border-slate-200">
+                        <i class="fa-regular fa-copy"></i>
+                        <span>نسخ الرابط</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 2: منظومة التنمية (الإغاثة الوطنية) -->
+            <div class="glass-card rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between border-t-4 border-emerald-600 group relative">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl font-black shadow-inner">
+                            <i class="fa-solid fa-hand-holding-hand"></i>
+                        </span>
+                        <span class="bg-emerald-50 text-emerald-700 text-xs font-extrabold px-3 py-1 rounded-full border border-emerald-200">
+                            مساعدات وإغاثة
+                        </span>
+                    </div>
+
+                    <h2 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-emerald-600 transition-colors">
+                        🌍 منظومة التنمية
+                    </h2>
+                    <p class="text-xs font-bold text-emerald-700 mb-1">
+                        (الإغاثة الوطنية - الأسر)
+                    </p>
+                    <p class="text-slate-500 text-xs font-semibold mb-4 leading-relaxed">
+                        متابعة وتسجيل طلبات الإغاثة والمساعدات المخصصة للأسر داخل المخيمات والإيواءات.
+                    </p>
+
+                    <!-- QR Code Container -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col items-center justify-center mb-5 qr-frame relative">
+                        <div id="qrcode-2" class="p-2 bg-white rounded-lg shadow-sm border border-slate-100"></div>
+                        <span class="text-[11px] font-bold text-slate-400 mt-2 flex items-center gap-1">
+                            <i class="fa-solid fa-qrcode"></i> امسح الكود بالهاتف للدخول
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="space-y-2">
+                    <a href="https://releif.egaza.ps/in_shelter_families" target="_blank" rel="noopener noreferrer" 
+                       class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-lg hover:shadow-emerald-500/30 flex items-center justify-center gap-2 text-sm group">
+                        <span>دخول مباشر</span>
+                        <i class="fa-solid fa-arrow-left transition-transform group-hover:-translate-x-1"></i>
+                    </a>
+                    
+                    <button onclick="copyToClipboard('https://releif.egaza.ps/in_shelter_families', 'منظومة الإغاثة الوطنية')" 
+                            class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2 px-3 rounded-xl transition-all text-xs flex items-center justify-center gap-2 border border-slate-200">
+                        <i class="fa-regular fa-copy"></i>
+                        <span>نسخ الرابط</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 3: رابط منظومة التنمية (أفراد) -->
+            <div class="glass-card rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between border-t-4 border-amber-500 group relative">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl font-black shadow-inner">
+                            <i class="fa-solid fa-user-gear"></i>
+                        </span>
+                        <span class="bg-amber-50 text-amber-700 text-xs font-extrabold px-3 py-1 rounded-full border border-amber-200">
+                            خدمات الأفراد
+                        </span>
+                    </div>
+
+                    <h2 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-amber-600 transition-colors">
+                        🌍 منظومة التنمية
+                    </h2>
+                    <p class="text-xs font-bold text-amber-700 mb-1">
+                        (بوابة الخدمات الإلكترونية للأفراد)
+                    </p>
+                    <p class="text-slate-500 text-xs font-semibold mb-4 leading-relaxed">
+                        بوابة الاستعلام والتحديث المباشر للبيانات والمعاملات الخاصة بالأفراد.
+                    </p>
+
+                    <!-- QR Code Container -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col items-center justify-center mb-5 qr-frame relative">
+                        <div id="qrcode-3" class="p-2 bg-white rounded-lg shadow-sm border border-slate-100"></div>
+                        <span class="text-[11px] font-bold text-slate-400 mt-2 flex items-center gap-1">
+                            <i class="fa-solid fa-qrcode"></i> امسح الكود بالهاتف للدخول
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="space-y-2">
+                    <a href="https://services.citizen.egaza.ps/login" target="_blank" rel="noopener noreferrer" 
+                       class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-lg hover:shadow-amber-500/30 flex items-center justify-center gap-2 text-sm group">
+                        <span>دخول مباشر</span>
+                        <i class="fa-solid fa-arrow-left transition-transform group-hover:-translate-x-1"></i>
+                    </a>
+                    
+                    <button onclick="copyToClipboard('https://services.citizen.egaza.ps/login', 'منظومة الأفراد')" 
+                            class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2 px-3 rounded-xl transition-all text-xs flex items-center justify-center gap-2 border border-slate-200">
+                        <i class="fa-regular fa-copy"></i>
+                        <span>نسخ الرابط</span>
+                    </button>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Technical Support Info Section -->
+        <section class="glass-card rounded-2xl p-6 shadow-md mb-8 border border-emerald-200/60 bg-gradient-to-r from-emerald-900 to-slate-900 text-white">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-right">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl shrink-0 border border-emerald-500/30">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-extrabold text-emerald-400 mb-1">قسم الدعم الفني وتقنية المعلومات</h3>
+                        <p class="text-slate-300 text-xs font-semibold">في حال وجود أي مشكلة في تسجيل الدخول، يرجى التواصل مع مسؤول الإيواء المباشر.</p>
+                    </div>
+                </div>
+                <div class="shrink-0">
+                    <span class="inline-flex items-center gap-2 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-4 py-2 rounded-xl text-xs font-bold">
+                        <i class="fa-solid fa-shield-halved"></i> المنظومة تعمل على مدار 24 ساعة
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center py-6 text-slate-600 border-t border-slate-200/60">
+            <div class="inline-block bg-white/70 backdrop-blur px-6 py-3 rounded-2xl shadow-sm border border-slate-200/80">
+                <p class="font-extrabold text-slate-800 text-sm md:text-base flex items-center justify-center gap-2">
+                    <span>📌 مع تحيات 📌</span>
+                </p>
+                <p class="font-black text-emerald-700 text-base md:text-lg mt-1">
+                    ⛺ إيواءات دير البلح | الدعم الفني ⛺
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript logic -->
+    <script>
+        // Links Data Configuration
+        const linksData = [
+            { id: 'qrcode-1', url: 'https://displacedfamily.com/login', color: '#2563eb' },
+            { id: 'qrcode-2', url: 'https://releif.egaza.ps/in_shelter_families', color: '#059669' },
+            { id: 'qrcode-3', url: 'https://services.citizen.egaza.ps/login', color: '#d97706' }
+        ];
+
+        // Generate QR Codes dynamically on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            linksData.forEach(item => {
+                const element = document.getElementById(item.id);
+                if (element) {
+                    new QRCode(element, {
+                        text: item.url,
+                        width: 128,
+                        height: 128,
+                        colorDark: item.color,
+                        colorLight: "#ffffff",
+                        correctLevel: QRCode.CorrectLevel.H
+                    });
+                }
+            });
+        });
+
+        // Copy Link to Clipboard Function with Fallback
+        function copyToClipboard(text, name) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast(`تم نسخ رابط (${name}) بنجاح!`);
+                }).catch(() => {
+                    fallbackCopyTextToClipboard(text, name);
+                });
+            } else {
+                fallbackCopyTextToClipboard(text, name);
+            }
+        }
+
+        function fallbackCopyTextToClipboard(text, name) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.position = "fixed";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast(`تم نسخ رابط (${name}) بنجاح!`);
+            } catch (err) {
+                showToast('تعذر نسخ الرابط تلقائياً');
+            }
+            document.body.removeChild(textArea);
+        }
+
+        // Show Custom Toast Notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            toastMessage.textContent = message;
+            
+            toast.classList.remove('-translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('-translate-y-20', 'opacity-0');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
